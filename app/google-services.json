@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "953888556112",
+    "firebase_url": "https://m-learning-1e073-default-rtdb.firebaseio.com",
+    "project_id": "m-learning-1e073",
+    "storage_bucket": "m-learning-1e073.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953888556112:android:5e7a03c61238c02b0abd55",
+        "android_client_info": {
+          "package_name": "com.example.moodleLearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953888556112-39k66gp4mectgnfrncscu0ljma6v0sdv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-BMvgWVpMqZ_Bu_R6NfYGSI3fbDaT1wE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953888556112-39k66gp4mectgnfrncscu0ljma6v0sdv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

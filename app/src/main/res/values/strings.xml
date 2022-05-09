@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Moodle Learning</string>
+    <string name="default_notification_channel_id" translatable="false">1</string>
+    <string name="long_text">lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="Signup">Create Account</string>
+    <string name="fName">First Name</string>
+    <string name="mName">Middle Name</string>
+    <string name="lName">Last Name</string>
+    <string name="email">Email</string>
+    <string name="Bio">Bio</string>
+    <string name="BirthdayYear">Birthday Year</string>
+    <string name="Address">Address</string>
+    <string name="MobileNumber">Mobile Number</string>
+    <string name="Password">Password</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="Student">Student</string>
+    <string name="Teacher">Teacher</string>
+    <string name="tvLoginFromSignup">Already have an account? Login</string>
+    <string name="createAccount">Don\'t have account? Create Account</string>
+    <string name="recommended">Recommended Courses</string>
+    <string name="MyCourses">My Courses</string>
+    <string name="Search">Search</string>
+    <string name="Home">Home</string>
+    <string name="category">Category</string>
+    <string name="CourseName">Course Name</string>
+    <string name="AddNewCourse">New Course</string>
+    <string name="NewLecture">New Lecture</string>
+</resources>
