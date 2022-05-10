@@ -5,9 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
-        android:name="com.example.moodleLearning.utils.Application"
+        android:name=".utils.Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_splash"
         android:label="@string/app_name"
@@ -16,36 +17,31 @@
         android:roundIcon="@drawable/ic_splash"
         android:supportsRtl="false"
         android:theme="@style/Theme.Moodle">
+        <activity
+            android:name=".ui.LectureDetails.LectureDetailsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name="com.example.moodleLearning.ui.AddLectureActivity"
+            android:name=".ui.Teacher.AddLecture.AddLectureActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.TeacherLectureActivity"
+            android:name=".ui.Teacher.AddCourse.AddCourseActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.AddCourseActivity"
+            android:name=".ui.Teacher.MyCourses.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.DashboardActivity"
+            android:name=".ui.CategoryScreen.SingleCategoryActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.SingleCategoryActivity"
+            android:name=".ui.CourseDetails.CourseDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.YTVideoActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name="com.example.moodleLearning.ui.CourseDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.moodleLearning.ui.SearchActivity"
+            android:name=".ui.Search.SearchActivity"
             android:exported="false" />
 
         <meta-data
@@ -59,7 +55,7 @@
             android:value="@string/default_notification_channel_id" />
 
         <service
-            android:name="com.example.moodleLearning.utils.FCMService"
+            android:name=".utils.FCMService"
             android:directBootAware="true"
             android:exported="false">
             <intent-filter>
@@ -69,13 +65,13 @@
         </service>
 
         <activity
-            android:name="com.example.moodleLearning.ui.SignupActivity"
+            android:name=".ui.CreateAccount.SignupActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.LoginActivity"
+            android:name=".ui.Login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.moodleLearning.ui.SplashActivity"
+            android:name=".ui.Splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,10 +80,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.moodleLearning.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.moodleLearning.ui.PublicChatActivity"
+            android:name=".ui.Chat.PublicChatActivity"
             android:exported="false" />
     </application>
 

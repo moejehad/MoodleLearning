@@ -2,9 +2,6 @@
     <string name="app_name">Moodle Learning</string>
     <string name="default_notification_channel_id" translatable="false">1</string>
     <string name="long_text">lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem lorem ipsem</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <string name="Signup">Create Account</string>
     <string name="fName">First Name</string>

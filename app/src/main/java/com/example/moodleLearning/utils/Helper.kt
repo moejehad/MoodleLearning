@@ -8,7 +8,13 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.moodleLearning.models.User
+import com.example.moodleLearning.data.models.User
+import com.example.moodleLearning.utils.Constant.SHARED_PREF_NAME
+import com.example.moodleLearning.utils.Constant.SHARED_USER_EMAIL
+import com.example.moodleLearning.utils.Constant.SHARED_USER_ID
+import com.example.moodleLearning.utils.Constant.SHARED_USER_PHOTO
+import com.example.moodleLearning.utils.Constant.USERS_COLLECTION
+import com.example.moodleLearning.utils.Constant.USER_TOKEN
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -77,22 +83,22 @@ class Helper {
         }
 
         fun saveUserSession(context: Context, user: FirebaseUser) {
-            val sharedPref = context.getSharedPreferences(User.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            val sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             with(sharedPref.edit()) {
-                putString(User.SHARED_USER_ID, user.uid)
-                putString(User.SHARED_PREF_NAME, user.displayName)
-                putString(User.SHARED_USER_EMAIL, user.email)
-                putString(User.SHARED_USER_PHOTO, user.photoUrl?.toString())
+                putString(SHARED_USER_ID, user.uid)
+                putString(SHARED_PREF_NAME, user.displayName)
+                putString(SHARED_USER_EMAIL, user.email)
+                putString(SHARED_USER_PHOTO, user.photoUrl?.toString())
                 commit()
             }
         }
 
         fun updateUserToken(context: Context, userId: String) {
             FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
-                Firebase.firestore.collection(User.USERS_COLLECTION).document(userId).update(User.USER_TOKEN,token)
-                val sharedPref = context.getSharedPreferences(User.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                Firebase.firestore.collection(USERS_COLLECTION).document(userId).update(USER_TOKEN,token)
+                val sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
                 with(sharedPref.edit()) {
-                    putString(User.USER_TOKEN, token)
+                    putString(USER_TOKEN, token)
                     apply()
                 }
             }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CourseDetailsActivity">
+    tools:context=".ui.CourseDetails.CourseDetailsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/courseDetailsLayout"
@@ -185,7 +185,7 @@
                     android:background="@drawable/btn_bg"
                     android:enabled="false"
                     android:fontFamily="@font/readex_regular"
-                    android:text="Register Course"
+                    android:text="Subscribe in Course"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
@@ -291,10 +291,5 @@
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/flBottomSheet"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

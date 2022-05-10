@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".ui.AddLectureActivity">
+    tools:context=".ui.Teacher.AddLecture.AddLectureActivity">
 
     <ImageView
         android:id="@+id/backIcon"
@@ -72,6 +72,17 @@
             android:background="@drawable/et_bg"
             android:fontFamily="@font/readex_regular"
             android:hint="Lecture Youtube Video Id"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/LectureVideo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="15dp"
+            android:background="@drawable/et_bg"
+            android:fontFamily="@font/readex_regular"
+            android:hint="Lecture Video Id"
             android:textSize="14sp" />
 
         <Button

@@ -3,15 +3,28 @@ package com.example.moodleLearning.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.moodleLearning.adapters.CategoriesAdapter
-import com.example.moodleLearning.adapters.CoursesAdapter
-import com.example.moodleLearning.adapters.RegisteredCoursesAdapter
+import com.example.moodleLearning.data.adapters.CategoriesAdapter
+import com.example.moodleLearning.data.adapters.CoursesAdapter
+import com.example.moodleLearning.data.adapters.RegisteredCoursesAdapter
 import com.example.moodleLearning.databinding.ActivityMainBinding
-import com.example.moodleLearning.models.Category
-import com.example.moodleLearning.models.Course
-import com.example.moodleLearning.models.User
-import com.example.moodleLearning.ui.CourseDetailsActivity.Companion.EXTRA_COURSE_ID
-import com.example.moodleLearning.ui.CourseDetailsActivity.Companion.EXTRA_COURSE_NAME
+import com.example.moodleLearning.data.models.Category
+import com.example.moodleLearning.data.models.Course
+import com.example.moodleLearning.data.models.User
+import com.example.moodleLearning.ui.CategoryScreen.SingleCategoryActivity
+import com.example.moodleLearning.ui.CourseDetails.CourseDetailsActivity
+import com.example.moodleLearning.ui.Search.SearchActivity
+import com.example.moodleLearning.ui.Teacher.MyCourses.DashboardActivity
+import com.example.moodleLearning.utils.Constant.CATEGORIES_COLLECTION
+import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
+import com.example.moodleLearning.utils.Constant.COURSE_CATEGORY
+import com.example.moodleLearning.utils.Constant.COURSE_HOURS
+import com.example.moodleLearning.utils.Constant.COURSE_IMG
+import com.example.moodleLearning.utils.Constant.COURSE_TITLE
+import com.example.moodleLearning.utils.Constant.EXTRA_COURSE_ID
+import com.example.moodleLearning.utils.Constant.EXTRA_COURSE_NAME
+import com.example.moodleLearning.utils.Constant.TEACHER_ENUM
+import com.example.moodleLearning.utils.Constant.USERS_COLLECTION
+import com.example.moodleLearning.utils.Constant.USER_ACTIVE_COURSES
 import com.example.moodleLearning.utils.Helper
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -41,9 +54,9 @@ class MainActivity : AppCompatActivity() , CoursesAdapter.OnClick, RegisteredCou
         categoriesAdapter = CategoriesAdapter(this, this)
         binding.rvCategories.adapter = categoriesAdapter
 
-        db.collection(User.USERS_COLLECTION).document(user!!.uid).get().addOnSuccessListener {
+        db.collection(USERS_COLLECTION).document(user!!.uid).get().addOnSuccessListener {
             val user = it.toObject(User::class.java)
-            if(user!!.role == User.TEACHER_ENUM){
+            if(user!!.role == TEACHER_ENUM){
                 binding.btnDashboard.visibility = android.view.View.VISIBLE
 
                 binding.btnDashboard.setOnClickListener {
@@ -68,13 +81,13 @@ class MainActivity : AppCompatActivity() , CoursesAdapter.OnClick, RegisteredCou
     }
 
     private fun initCategoriesAdapter() {
-        db.collection(Category.CATEGORIES_COLLECTION).get().addOnSuccessListener { docs ->
+        db.collection(CATEGORIES_COLLECTION).get().addOnSuccessListener { docs ->
             categoriesAdapter.setData(docs.toObjects(Category::class.java))
         }
     }
 
     private fun initCoursesAdapter() {
-        db.collection(Course.COURSES_COLLECTION)
+        db.collection(COURSES_COLLECTION)
             .limit(20)
             .get()
             .addOnSuccessListener { docs ->
@@ -88,21 +101,21 @@ class MainActivity : AppCompatActivity() , CoursesAdapter.OnClick, RegisteredCou
     }
 
     private fun initRegisteredCoursesAdapter() {
-        db.collection(User.USERS_COLLECTION).document(user!!.uid).get()
+        db.collection(USERS_COLLECTION).document(user!!.uid).get()
             .addOnSuccessListener { doc ->
-                if (doc[User.USER_ACTIVE_COURSES] == null) return@addOnSuccessListener
+                if (doc[USER_ACTIVE_COURSES] == null) return@addOnSuccessListener
 
-                val registeredCoursesIds = doc[User.USER_ACTIVE_COURSES] as ArrayList<*>
+                val registeredCoursesIds = doc[USER_ACTIVE_COURSES] as ArrayList<*>
                 val registeredCourses = ArrayList<Course>()
 
                 registeredCoursesIds.forEach { courseId ->
                     Helper.log(this, courseId.toString())
-                    db.collection(Course.COURSES_COLLECTION).document(courseId.toString()).get()
+                    db.collection(COURSES_COLLECTION).document(courseId.toString()).get()
                         .addOnSuccessListener {
-                            val img = it[Course.COURSE_IMG] as String
-                            val title = it[Course.COURSE_TITLE] as String
-                            val cat = it[Course.COURSE_CATEGORY] as String
-                            val hours = it[Course.COURSE_HOURS] as Long
+                            val img = it[COURSE_IMG] as String
+                            val title = it[COURSE_TITLE] as String
+                            val cat = it[COURSE_CATEGORY] as String
+                            val hours = it[COURSE_HOURS] as Long
                             registeredCourses.add(Course(it.id, img, title, cat, hours))
 
                             if (courseId.toString() == registeredCoursesIds.last().toString()) {

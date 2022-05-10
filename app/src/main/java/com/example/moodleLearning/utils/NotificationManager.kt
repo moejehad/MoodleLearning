@@ -10,7 +10,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.example.moodleLearning.R
-import com.example.moodleLearning.ui.SplashActivity
+import com.example.moodleLearning.ui.Splash.SplashActivity
 
 class NotificationManager {
     companion object {
