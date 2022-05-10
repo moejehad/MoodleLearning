@@ -10,9 +10,10 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.example.moodleLearning.R
-import com.example.moodleLearning.data.models.Lecture
-import com.example.moodleLearning.ui.Teacher.LectuerInfo.LectureAssignmentsFragment
-import com.example.moodleLearning.ui.Teacher.LectuerInfo.LectureWatchersFragment
+import com.example.moodleLearning.data.adapters.LectureAssignmentAdapter
+import com.example.moodleLearning.data.adapters.LectureWatchersAdapter
+import com.example.moodleLearning.data.models.Assignment
+import com.example.moodleLearning.data.models.User
 import com.example.moodleLearning.utils.Constant
 import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
 import com.example.moodleLearning.utils.Constant.COURSE_ID
@@ -42,17 +43,18 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_edit_lecture.*
 import java.util.*
 
 
-class EditLectureActivity : AppCompatActivity() {
+class EditLectureActivity : AppCompatActivity() , LectureAssignmentAdapter.OnClick {
 
     private val user = Firebase.auth.currentUser
     private val db = Firebase.firestore
     lateinit var storge: FirebaseStorage
-    lateinit var reference: StorageReference
+
+    private lateinit var adapter : LectureWatchersAdapter
+    private lateinit var AssignmentAdapter : LectureAssignmentAdapter
 
     lateinit var exoPlayer: PlayerView
     private lateinit var simpleExoPlayerView: SimpleExoPlayer
@@ -91,7 +93,14 @@ class EditLectureActivity : AppCompatActivity() {
         exoPlayer = findViewById(R.id.EditLectureExoplayer)
         initPlayer(lectureVideo!!)
 
-        deliverAssignments()
+        adapter = LectureWatchersAdapter(this)
+        rvWatchers.adapter = adapter
+        getWatchersIds()
+
+        AssignmentAdapter = LectureAssignmentAdapter(this,this)
+        rvAssignments.adapter = adapter
+        getAssignments()
+
         deleteAssigments()
 
         LectureVideo.setOnClickListener {
@@ -112,18 +121,6 @@ class EditLectureActivity : AppCompatActivity() {
 
         simpleExoPlayerView.playWhenReady = true
         simpleExoPlayerView.play()
-
-
-        /*btnWatchers.setOnClickListener {
-            LectureWatchersFragment()
-                .apply {
-                    arguments = Bundle().apply {
-                        putString(LectureWatchersFragment.EXTRA_LECTURE_ID, lectureId)
-                        putString(LectureWatchersFragment.EXTRA_COURSE_ID, courseId)
-                    }
-                }
-                .show(supportFragmentManager, "LectureInfoFragment")
-        }*/
 
     }
 
@@ -181,19 +178,77 @@ class EditLectureActivity : AppCompatActivity() {
         }
     }
 
-    private fun deliverAssignments() {
-        btnAssignments.setOnClickListener {
-            LectureAssignmentsFragment()
-                .apply {
-                    arguments = Bundle().apply {
-                        putString(LectureAssignmentsFragment.EXTRA_LECTURE_ID, lectureId)
-                        putString(LectureAssignmentsFragment.EXTRA_COURSE_ID, courseId)
+
+    private fun getWatchersIds() {
+        db.collection(COURSES_COLLECTION)
+            .document(courseId.toString())
+            .collection(LECTURES_COLLECTION)
+            .document(lectureId.toString())
+            .get()
+            .addOnSuccessListener { docs ->
+                val watchers = docs[Constant.LECTURE_WATCHERS_IDS] as ArrayList<String>
+                watchers.forEach { doc ->
+                    getWatcher(doc)
+                }
+            }
+            .addOnFailureListener {
+                Helper.toast(
+                    this,
+                    "Failed To Get Watchers Information ${it.message}"
+                )
+            }
+    }
+
+    private fun getWatcher(userId : String) {
+        db.collection(Constant.USERS_COLLECTION).document(userId).get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                adapter.setData(User(user!!.id, user.firstName, user.middleName, user.lastName, user.email))
+            }
+            .addOnFailureListener {
+                Helper.toast(
+                    this,
+                    "Failed To Get Information For Watchers Students  ${it.message}"
+                )
+            }
+    }
+
+
+    private fun getAssignments() {
+        db.collection(COURSES_COLLECTION)
+            .document(courseId.toString())
+            .collection(LECTURES_COLLECTION)
+            .document(lectureId.toString())
+            .collection(Assignment.COLLECTION_NAME)
+            .get()
+            .addOnSuccessListener { docs ->
+                docs.forEach { doc ->
+                    docs.toObjects(Assignment::class.java).forEach {
+                        getAssignmentUser(it.userId, it.id, it.fileUrl, it.date)
                     }
                 }
-                .show(supportFragmentManager, "LectureInfoFragment")
+            }
+            .addOnFailureListener {
+                Helper.toast(
+                    this,
+                    "Failed To Get Assignments Information ${it.message}"
+                )
         }
     }
 
+    private fun getAssignmentUser(userId : String, id: String, url: String, date: Timestamp) {
+        db.collection(Constant.USERS_COLLECTION).document(userId).get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                AssignmentAdapter.setData(Assignment(id, url, date, user?.firstName + " " + user?.middleName + " " + user?.lastName, user?.email ?: "No Email"))
+            }
+            .addOnFailureListener {
+                Helper.toast(
+                    this,
+                    "Failed To Get Assignment Student Information ${it.message}"
+                )
+            }
+    }
     val getVideo = registerForActivityResult(
         ActivityResultContracts.GetContent(),
         ActivityResultCallback {
@@ -295,6 +350,11 @@ class EditLectureActivity : AppCompatActivity() {
 
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
+
+    override fun onClick(item: Assignment) {
+
+    }
+
 }
 
 enum class UrlType(var url: String) {

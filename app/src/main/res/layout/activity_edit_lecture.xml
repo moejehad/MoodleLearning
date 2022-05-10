@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,154 +7,172 @@
     android:background="@color/gray"
     tools:context=".ui.Teacher.EditLecture.EditLectureActivity">
 
-    <ImageView
-        android:id="@+id/backIcon"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic__left"
-        app:tint="@color/blue" />
-
-    <TextView
-        android:id="@+id/screenTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/readex_bold"
-        android:gravity="center"
-        android:text="@string/editLecture"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/backIcon"
-        app:layout_constraintTop_toTopOf="@+id/backIcon"/>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backIcon">
+        android:layout_height="match_parent">
 
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/EditLectureExoplayer"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintDimensionRatio="16:9" />
-
-        <EditText
-            android:id="@+id/etLectureTitle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/readex_regular"
-            android:hint="Lecture Title"
-            android:textSize="14sp" />
-
-        <EditText
-            android:id="@+id/etLectureUrl"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/readex_regular"
-            android:hint="Lecture Document Url"
-            android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/backIcon"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic__left"
+            app:tint="@color/blue" />
 
         <TextView
-            android:id="@+id/LectureVideo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:paddingTop="15dp"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/readex_regular"
-            android:drawableEnd="@drawable/ic_watch"
-            android:drawableTint="@color/gray_dark"
-            android:hint="Upload Video"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/uploadSuccess"
-            android:layout_width="match_parent"
+            android:id="@+id/screenTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textColor="@android:color/holo_green_dark"
-            android:fontFamily="@font/readex_regular"
-            android:text="Video Upload Successfully"
-            android:visibility="gone"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/btnNewLecture"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/btn_bg"
-            android:fontFamily="@font/readex_regular"
-            android:text="Edit Lecture"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDeleteLecture"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="#CB3333"
-            android:fontFamily="@font/readex_regular"
-            android:text="Delete Lecture"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/readex_bold"
+            android:gravity="center"
+            android:text="@string/editLecture"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/backIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/backIcon" />
 
         <LinearLayout
-            android:id="@+id/llLectureList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backIcon">
 
-            <LinearLayout
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/EditLectureExoplayer"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintDimensionRatio="16:9" />
+
+            <EditText
+                android:id="@+id/etLectureTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Lecture Title"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etLectureUrl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Lecture Document Url"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/LectureVideo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:drawableEnd="@drawable/ic_watch"
+                android:drawableTint="@color/gray_dark"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Upload Video"
+                android:paddingTop="15dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/uploadSuccess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/readex_regular"
+                android:text="Video Upload Successfully"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnNewLecture"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/readex_regular"
+                android:text="Edit Lecture"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDeleteLecture"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="#CB3333"
+                android:fontFamily="@font/readex_regular"
+                android:text="Delete Lecture"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/llLectureList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:weightSum="2">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnWatchers"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="5dp"
+                <TextView
+                    android:id="@+id/WatchersText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_bg"
                     android:fontFamily="@font/readex_regular"
-                    android:text="Lecture Viewers"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:text="Lecture Viewers" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnAssignments"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvWatchers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_bg"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/lecture_watchers_item" />
+
+
+                <TextView
+                    android:id="@+id/AssignmentsText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/readex_regular"
-                    android:text="Assignments"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:text="Lecture Assignments" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAssignments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/lecture_students_item" />
+
+
             </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

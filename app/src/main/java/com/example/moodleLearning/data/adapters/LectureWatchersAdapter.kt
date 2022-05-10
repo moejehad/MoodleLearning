@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moodleLearning.databinding.LectureWatchersItemBinding
 import com.example.moodleLearning.data.models.User
 
-class LectureWatchersAdapter(val context: Context, val click: OnClick) : RecyclerView.Adapter<LectureWatchersAdapter.ViewHolder>() {
+class LectureWatchersAdapter(val context: Context) : RecyclerView.Adapter<LectureWatchersAdapter.ViewHolder>() {
     private var list = mutableListOf<User>()
 
     class ViewHolder(val binding: LectureWatchersItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -25,10 +25,6 @@ class LectureWatchersAdapter(val context: Context, val click: OnClick) : Recycle
 
         holder.binding.studentName.text = item.firstName + " " + item.middleName+ " " + item.lastName
         holder.binding.studentEmail.text = item.email
-
-        holder.binding.root.setOnClickListener {
-            click.onClick(item)
-        }
     }
 
     fun setData(data: User) {
@@ -43,10 +39,6 @@ class LectureWatchersAdapter(val context: Context, val click: OnClick) : Recycle
     fun clearData() {
         list.clear()
         notifyDataSetChanged()
-    }
-
-    interface OnClick {
-        fun onClick(item: User)
     }
 
 }

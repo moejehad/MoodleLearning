@@ -2,7 +2,6 @@ package com.example.moodleLearning.ui.Teacher.AddLecture
 
 import android.app.ProgressDialog
 import android.net.Uri
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,15 +10,11 @@ import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.moodleLearning.databinding.ActivityAddLectureBinding
 import com.example.moodleLearning.data.models.Lecture
-import com.example.moodleLearning.ui.Teacher.LectuerInfo.LectureAssignmentsFragment
-import com.example.moodleLearning.ui.Teacher.LectuerInfo.LectureWatchersFragment
 import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
 import com.example.moodleLearning.utils.Constant.EXTRA_COURSE_ID
 import com.example.moodleLearning.utils.Constant.EXTRA_COURSE_NAME
 import com.example.moodleLearning.utils.Constant.EXTRA_LECTURE_ID
 import com.example.moodleLearning.utils.Constant.LECTURES_COLLECTION
-import com.example.moodleLearning.utils.Constant.LECTURE_DOCS_URL
-import com.example.moodleLearning.utils.Constant.LECTURE_VIDEO_URL
 import com.example.moodleLearning.utils.FCMService
 import com.example.moodleLearning.utils.Helper.Companion.toast
 import com.google.firebase.Timestamp
