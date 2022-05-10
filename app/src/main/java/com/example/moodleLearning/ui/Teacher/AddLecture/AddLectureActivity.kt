@@ -2,6 +2,7 @@ package com.example.moodleLearning.ui.Teacher.AddLecture
 
 import android.app.ProgressDialog
 import android.net.Uri
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +10,6 @@ import android.webkit.URLUtil
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.moodleLearning.databinding.ActivityAddLectureBinding
-import com.example.moodleLearning.data.models.Course
 import com.example.moodleLearning.data.models.Lecture
 import com.example.moodleLearning.ui.Teacher.LectuerInfo.LectureAssignmentsFragment
 import com.example.moodleLearning.ui.Teacher.LectuerInfo.LectureWatchersFragment
@@ -21,8 +21,6 @@ import com.example.moodleLearning.utils.Constant.LECTURES_COLLECTION
 import com.example.moodleLearning.utils.Constant.LECTURE_DOCS_URL
 import com.example.moodleLearning.utils.Constant.LECTURE_VIDEO_URL
 import com.example.moodleLearning.utils.FCMService
-import com.example.moodleLearning.utils.Helper.Companion.YT_SUFFIX_1
-import com.example.moodleLearning.utils.Helper.Companion.YT_SUFFIX_2
 import com.example.moodleLearning.utils.Helper.Companion.toast
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
@@ -39,12 +37,9 @@ class AddLectureActivity : AppCompatActivity() {
     private val db = Firebase.firestore
     lateinit var storge: FirebaseStorage
     lateinit var reference: StorageReference
-    private var courseId : String? = null
-    private var courseName : String? = null
-    private var lectureId : String? = null
-    private var lectureTitle = ""
-    private var lectureUrl = ""
-    private var lectureVideo = ""
+    private var courseId: String? = null
+    private var courseName: String? = null
+    private var lectureId: String? = null
     lateinit var progressDialog: ProgressDialog
     var path: String = ""
 
@@ -61,7 +56,7 @@ class AddLectureActivity : AppCompatActivity() {
 
         courseId = intent.getStringExtra(EXTRA_COURSE_ID)
         courseName = intent.getStringExtra(EXTRA_COURSE_NAME)
-        lectureId = intent.getStringExtra(EXTRA_LECTURE_ID) // if null, then add new course else update existing course
+        lectureId = intent.getStringExtra(EXTRA_LECTURE_ID)
 
         binding.backIcon.setOnClickListener {
             onBackPressed()
@@ -70,33 +65,58 @@ class AddLectureActivity : AppCompatActivity() {
         binding.LectureVideo.setOnClickListener {
             pickVideo()
         }
+    }
 
-        if (lectureId != null) {
-            binding.btnNewLecture.isEnabled = false
-            binding.llLectureList.visibility = View.VISIBLE
-            binding.screenTitle.text = "Update Lecture"
-            binding.btnNewLecture.text = "Update Lecture"
-            binding.btnDeleteLecture.visibility = android.view.View.VISIBLE
+    override fun onResume() {
+        super.onResume()
 
-            db.collection(COURSES_COLLECTION)
-                .document(courseId!!)
-                .collection(LECTURES_COLLECTION)
-                .document(lectureId!!)
-                .get()
-                .addOnSuccessListener {
-                    val lecture = it.toObject(Lecture::class.java)
+        binding.btnNewLecture.setOnClickListener {
+            if (binding.etLectureTitle.text.toString().isEmpty()) {
+                toast(applicationContext, "Please enter lecture title")
+                return@setOnClickListener
+            }
+            if (!URLUtil.isValidUrl(binding.etLectureUrl.text.toString())) {
+                toast(applicationContext, "Please enter valid lecture url")
+                return@setOnClickListener
+            }
 
-                    binding.etLectureTitle.setText(lecture?.title)
-                    binding.etLectureUrl.setText(lecture?.docsUrl)
-                    binding.etLectureVideoUrl.setText(lecture?.videoUrl)
+            binding.btnNewLecture.text = "Add Lecture"
+            binding.screenTitle.text = "Add Lecture"
+            addNewLecture(path)
 
-                    lectureTitle = lecture?.title.toString()
-                    lectureUrl = lecture?.docsUrl.toString()
-                    lectureVideo = lecture?.videoUrl.toString()
-                }
-
-            binding.btnNewLecture.isEnabled = true
         }
+    }
+
+    private fun addNewLecture(imagePath: String) {
+        val lecture = Lecture(
+            binding.etLectureTitle.text.toString(),
+            binding.etLectureUrl.text.toString(),
+            imagePath,
+            Timestamp.now()
+        )
+
+        db.collection(COURSES_COLLECTION)
+            .document(courseId!!)
+            .collection(LECTURES_COLLECTION)
+            .add(lecture)
+            .addOnSuccessListener {
+                db.collection(COURSES_COLLECTION).document(courseId!!).get().addOnSuccessListener {
+                    FCMService.sendRemoteNotification(
+                        "New lecture added to $courseName",
+                        "${lecture.title} added to $courseName",
+                        null,
+                        courseId!!
+                    )
+                    toast(applicationContext, "Lecture added successfully")
+                    finish()
+                }.addOnFailureListener {
+                    toast(applicationContext, "Failed To Add Course")
+                }
+            }
+            .addOnFailureListener {
+                it.printStackTrace()
+                toast(applicationContext, "Failed to add lecture ${it.message}")
+            }
     }
 
     val getVideo = registerForActivityResult(
@@ -117,6 +137,7 @@ class AddLectureActivity : AppCompatActivity() {
         ref.putFile(uri!!).addOnSuccessListener { taskSnapshot ->
             taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                 path = uri.toString()
+                binding.uploadSuccess.visibility = View.VISIBLE
             }
             progressDialog.dismiss()
         }.addOnFailureListener { exception ->
@@ -125,123 +146,5 @@ class AddLectureActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
 
-        binding.btnAssignments.setOnClickListener {
-            LectureAssignmentsFragment()
-                .apply {
-                    arguments = Bundle().apply {
-                        putString(LectureAssignmentsFragment.EXTRA_LECTURE_ID, lectureId)
-                        putString(LectureAssignmentsFragment.EXTRA_COURSE_ID, courseId)
-                    }
-                }
-                .show(supportFragmentManager, "LectureInfoFragment")
-        }
-
-        binding.btnWatchers.setOnClickListener {
-            LectureWatchersFragment()
-                .apply {
-                    arguments = Bundle().apply {
-                        putString(LectureWatchersFragment.EXTRA_LECTURE_ID, lectureId)
-                        putString(LectureWatchersFragment.EXTRA_COURSE_ID, courseId)
-                    }
-                }
-                .show(supportFragmentManager, "LectureInfoFragment")
-        }
-
-        binding.btnDeleteLecture.setOnClickListener {
-            db.collection(COURSES_COLLECTION)
-                .document(courseId!!)
-                .collection(LECTURES_COLLECTION)
-                .document(lectureId!!)
-                .delete()
-                .addOnSuccessListener {
-                    toast(applicationContext, "Lecture deleted")
-                    finish()
-                }
-                .addOnFailureListener {
-                    toast(applicationContext, "Failed to delete lecture ${it.message}")
-                }
-        }
-
-        binding.btnNewLecture.setOnClickListener {
-            if (binding.etLectureTitle.text.toString().isEmpty()) {
-                toast(applicationContext, "Please enter lecture title")
-                return@setOnClickListener
-            }
-            if (!URLUtil.isValidUrl(binding.etLectureUrl.text.toString())) {
-                toast(applicationContext, "Please enter valid lecture url")
-                return@setOnClickListener
-            }
-            if (!binding.etLectureVideoUrl.text.startsWith(YT_SUFFIX_1) && !binding.etLectureVideoUrl.text.startsWith(YT_SUFFIX_2)) {
-                toast(applicationContext, "Please enter lecture Youtube video url")
-                return@setOnClickListener
-            }
-
-            if (lectureId != null) {
-                binding.btnNewLecture.text = "Update Lecture"
-                binding.screenTitle.text = "Update Lecture"
-                updateLecture(path)
-            } else {
-                binding.btnNewLecture.text = "Add Lecture"
-                binding.screenTitle.text = "Add Lecture"
-                addNewLecture(path)
-            }
-        }
-    }
-
-    private fun addNewLecture(imagePath: String) {
-        val lecture = Lecture(
-            binding.etLectureTitle.text.toString(),
-            binding.etLectureUrl.text.toString(),
-            imagePath,
-            Timestamp.now()
-        )
-
-        db.collection(COURSES_COLLECTION)
-            .document(courseId!!)
-            .collection(LECTURES_COLLECTION)
-            .add(lecture)
-            .addOnSuccessListener {
-                db.collection(COURSES_COLLECTION).document(courseId!!).get().addOnSuccessListener {
-                    FCMService.sendRemoteNotification("New lecture added to $courseName", "${lecture.title} added to $courseName", null, courseId!!)
-                    toast(applicationContext, "Lecture added successfully")
-                    finish()
-                }.addOnFailureListener {
-                    toast(applicationContext, "Failed To Add Course")
-                }
-            }
-            .addOnFailureListener {
-                it.printStackTrace()
-                toast(applicationContext, "Failed to add lecture ${it.message}")
-            }
-    }
-
-    private fun updateLecture(imagePath: String) {
-        val lectureMap = hashMapOf<String, Any>()
-        if (binding.etLectureTitle.text.toString() != lectureTitle) {
-            lectureMap[Lecture.LECTURE_TITLE] = binding.etLectureTitle.text.toString()
-        }
-        if (binding.etLectureUrl.text.toString() != lectureUrl) {
-            lectureMap[LECTURE_DOCS_URL] = binding.etLectureUrl.text.toString()
-        }
-        if (binding.etLectureVideoUrl.text.toString() != lectureVideo) {
-            lectureMap[LECTURE_VIDEO_URL] = imagePath
-        }
-
-        db.collection(COURSES_COLLECTION)
-            .document(courseId!!)
-            .collection(LECTURES_COLLECTION)
-            .document(lectureId!!)
-            .update(lectureMap)
-            .addOnSuccessListener {
-                toast(applicationContext, "Lecture added successfully")
-                finish()
-            }
-            .addOnFailureListener {
-                it.printStackTrace()
-                toast(applicationContext, "Failed to add lecture ${it.message}")
-            }
-    }
 }

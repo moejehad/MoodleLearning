@@ -51,9 +51,10 @@
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/message_bg.xml" value="0.144" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/title2_bg.xml" value="0.144" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_add_course.xml" value="0.14" />
-        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_add_lecture.xml" value="0.33" />
+        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_add_lecture.xml" value="0.25" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_course_details.xml" value="0.33" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_dashboard.xml" value="0.14" />
+        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_edit_lecture.xml" value="0.25" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_lecture_details.xml" value="0.18" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_main.xml" value="0.18" />

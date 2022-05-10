@@ -12,6 +12,7 @@ import com.example.moodleLearning.data.models.User
 import com.example.moodleLearning.ui.Chat.PublicChatActivity
 import com.example.moodleLearning.ui.LectureDetails.LectureDetailsActivity
 import com.example.moodleLearning.ui.Teacher.AddLecture.AddLectureActivity
+import com.example.moodleLearning.ui.Teacher.EditLecture.EditLectureActivity
 import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
 import com.example.moodleLearning.utils.Constant.COURSE_ID
 import com.example.moodleLearning.utils.Constant.COURSE_REGISTERS_EMAILS
@@ -21,7 +22,6 @@ import com.example.moodleLearning.utils.Constant.EXTRA_COURSE_NAME
 import com.example.moodleLearning.utils.Constant.EXTRA_IS_TEACHER
 import com.example.moodleLearning.utils.Constant.EXTRA_LECTURE_ID
 import com.example.moodleLearning.utils.Constant.LECTURES_COLLECTION
-import com.example.moodleLearning.utils.Constant.LECTURE_DATE
 import com.example.moodleLearning.utils.Constant.LECTURE_DOCS
 import com.example.moodleLearning.utils.Constant.LECTURE_DOCS_URL
 import com.example.moodleLearning.utils.Constant.LECTURE_Date
@@ -290,10 +290,13 @@ class CourseDetailsActivity : AppCompatActivity(), LecturesAdapter.OnClick {
     }
 
     override fun onTeacherClickLecture(lecture: Lecture) {
-        val intent = Intent(this, AddLectureActivity::class.java)
-        intent.putExtra(EXTRA_COURSE_ID, courseId)
-        intent.putExtra(EXTRA_LECTURE_ID, lecture.id)
+        val intent = Intent(this, EditLectureActivity::class.java)
+        intent.putExtra(COURSE_ID,courseId)
         intent.putExtra(EXTRA_COURSE_NAME, courseName)
+        intent.putExtra(LECTURE_ID,lecture.id)
+        intent.putExtra(LECTURE_TITLE,lecture.title)
+        intent.putExtra(LECTURE_VIDEO,lecture.videoUrl)
+        intent.putExtra(LECTURE_DOCS,lecture.docsUrl)
         startActivity(intent)
     }
 }
