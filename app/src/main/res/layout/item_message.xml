@@ -33,6 +33,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/messengerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/readex_regular"
+                android:layout_marginVertical="5dp"
+                android:text="Moe Jehad"
+                android:textColor="@color/blue"
+                android:visibility="gone"
+                android:layout_weight="0"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+            <TextView
                 android:id="@+id/messageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,26 +56,7 @@
                 android:fontFamily="@font/readex_regular"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp">
-                <ImageView
-                    android:id="@+id/messageImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="320dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"/>
-            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/messengerTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_weight="0"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

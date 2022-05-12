@@ -15,7 +15,6 @@ class FCMService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-//        Firebase.firestore.collection(User.USERS_COLLECTION).document(Firebase.auth.currentUser!!.uid).set(mapOf("token" to token))
         Helper.subscribeToTopic("all")
         Log.e("fcm", "onNewToken: $token")
     }
