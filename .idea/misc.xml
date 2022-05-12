@@ -55,6 +55,7 @@
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_courses.xml" value="0.144" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_dashboard.xml" value="0.144" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_delete.xml" value="0.144" />
+        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_edit.xml" value="0.1455" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_lectures.xml" value="0.144" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_link.xml" value="0.1445" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/drawable/ic_open_file.xml" value="0.144" />
@@ -72,12 +73,14 @@
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_course_details.xml" value="0.16" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_dashboard.xml" value="0.14" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_edit_lecture.xml" value="0.14" />
+        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_edit_profile.xml" value="0.22" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_lecture_details.xml" value="0.18" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_main.xml" value="0.15" />
+        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_profile.xml" value="0.17" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_public_chat.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_search.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_signup.xml" value="0.22" />
+        <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_signup.xml" value="0.14" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_single_category.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_splash.xml" value="0.12" />
         <entry key="..\:/Users/HP/Desktop/0000000/Moodle Learning/app/src/main/res/layout/activity_teacher_lecture.xml" value="0.20416666666666666" />

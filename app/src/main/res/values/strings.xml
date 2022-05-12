@@ -27,4 +27,6 @@
     <string name="AddNewCourse">New Course</string>
     <string name="NewLecture">New Lecture</string>
     <string name="editLecture">Edit Lecture</string>
+    <string name="profile">Profile</string>
+    <string name="editProfile">Edit Profile</string>
 </resources>

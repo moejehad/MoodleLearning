@@ -12,6 +12,7 @@ import com.example.moodleLearning.data.models.Course
 import com.example.moodleLearning.data.models.User
 import com.example.moodleLearning.ui.CategoryScreen.SingleCategoryActivity
 import com.example.moodleLearning.ui.CourseDetails.CourseDetailsActivity
+import com.example.moodleLearning.ui.Profile.ProfileActivity
 import com.example.moodleLearning.ui.Search.SearchActivity
 import com.example.moodleLearning.ui.Teacher.MyCourses.DashboardActivity
 import com.example.moodleLearning.utils.Constant.CATEGORIES_COLLECTION
@@ -53,6 +54,11 @@ class MainActivity : AppCompatActivity() , CoursesAdapter.OnClick, RegisteredCou
 
         categoriesAdapter = CategoriesAdapter(this, this)
         binding.rvCategories.adapter = categoriesAdapter
+
+        binding.userProfile.setOnClickListener {
+            val i = Intent(this, ProfileActivity::class.java)
+            startActivity(i)
+        }
 
         db.collection(USERS_COLLECTION).document(user!!.uid).get().addOnSuccessListener {
             val user = it.toObject(User::class.java)
