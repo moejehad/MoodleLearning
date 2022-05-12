@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,110 +7,115 @@
     android:background="@color/gray"
     tools:context=".ui.Teacher.AddCourse.AddCourseActivity">
 
-    <ImageView
-        android:id="@+id/backIcon"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic__left"
-        app:tint="@color/blue" />
-
-    <TextView
-        android:id="@+id/screenTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/readex_bold"
-        android:gravity="center"
-        android:text="@string/AddNewCourse"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/backIcon"
-        app:layout_constraintTop_toTopOf="@+id/backIcon"/>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/backIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ivCourse"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@drawable/et_bg"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/image_placeholder" />
+            android:id="@+id/backIcon"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic__left"
+            app:tint="@color/blue" />
 
-        <EditText
-            android:id="@+id/etCourseTitle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/readex_regular"
-            android:hint="Course Title" />
+        <TextView
+            android:id="@+id/screenTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/readex_bold"
+            android:gravity="center"
+            android:text="@string/AddNewCourse"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/backIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/backIcon" />
 
-        <EditText
-            android:id="@+id/etCourseDescription"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/readex_regular"
-            android:hint="Course Description"
-            android:inputType="textMultiLine" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backIcon">
 
-        <EditText
-            android:id="@+id/etCourseHours"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/et_bg"
-            android:fontFamily="@font/readex_regular"
-            android:hint="Course Hours"
-            android:inputType="number"
-            android:maxLength="3" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:hint="Category"
-            android:fontFamily="@font/readex_regular"
-            app:startIconTint="@color/gray_dark">
-
-            <AutoCompleteTextView
-                android:id="@+id/etCategory"
+            <ImageView
+                android:id="@+id/ivCourse"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:inputType="none"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="250dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/et_bg"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_placeholder" />
 
-        <Button
-            android:id="@+id/btnAddCourse"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/btn_bg"
-            android:textAllCaps="false"
-            android:fontFamily="@font/readex_medium"
-            android:textSize="15sp"
-            android:text="Add Course"
-            android:textColor="@color/white" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/etCourseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Course Title" />
+
+            <EditText
+                android:id="@+id/etCourseDescription"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Course Description"
+                android:inputType="textMultiLine" />
+
+            <EditText
+                android:id="@+id/etCourseHours"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Course Hours"
+                android:inputType="number"
+                android:maxLength="3" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:fontFamily="@font/readex_regular"
+                android:hint="Category"
+                app:startIconTint="@color/gray_dark">
+
+                <AutoCompleteTextView
+                    android:id="@+id/etCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnAddCourse"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/readex_medium"
+                android:text="Add Course"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

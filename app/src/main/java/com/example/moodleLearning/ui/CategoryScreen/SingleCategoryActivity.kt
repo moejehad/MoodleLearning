@@ -7,6 +7,7 @@ import com.example.moodleLearning.data.adapters.RegisteredCoursesAdapter
 import com.example.moodleLearning.databinding.ActivitySingleCategoryBinding
 import com.example.moodleLearning.data.models.Course
 import com.example.moodleLearning.ui.CourseDetails.CourseDetailsActivity
+import com.example.moodleLearning.utils.Constant.CATEGORY_NAME
 import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
 import com.example.moodleLearning.utils.Constant.COURSE_CATEGORY
 import com.example.moodleLearning.utils.Constant.EXTRA_COURSE_ID
@@ -25,10 +26,6 @@ class SingleCategoryActivity : AppCompatActivity() , RegisteredCoursesAdapter.On
     private val user = Firebase.auth.currentUser
     private val db = Firebase.firestore
 
-    companion object {
-        const val CATEGORY_NAME = "categoryName"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySingleCategoryBinding.inflate(layoutInflater)
@@ -36,6 +33,7 @@ class SingleCategoryActivity : AppCompatActivity() , RegisteredCoursesAdapter.On
 
         categoryName = intent.getStringExtra(CATEGORY_NAME).toString()
 
+        binding.screenTitle.text = categoryName
         adapter = RegisteredCoursesAdapter(this, this)
         binding.rvCourses.adapter = adapter
 

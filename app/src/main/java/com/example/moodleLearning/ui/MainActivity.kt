@@ -3,6 +3,7 @@ package com.example.moodleLearning.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.moodleLearning.data.adapters.CategoriesAdapter
 import com.example.moodleLearning.data.adapters.CoursesAdapter
 import com.example.moodleLearning.data.adapters.RegisteredCoursesAdapter
@@ -16,6 +17,7 @@ import com.example.moodleLearning.ui.Profile.ProfileActivity
 import com.example.moodleLearning.ui.Search.SearchActivity
 import com.example.moodleLearning.ui.Teacher.MyCourses.DashboardActivity
 import com.example.moodleLearning.utils.Constant.CATEGORIES_COLLECTION
+import com.example.moodleLearning.utils.Constant.CATEGORY_NAME
 import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
 import com.example.moodleLearning.utils.Constant.COURSE_CATEGORY
 import com.example.moodleLearning.utils.Constant.COURSE_HOURS
@@ -81,9 +83,14 @@ class MainActivity : AppCompatActivity() , CoursesAdapter.OnClick, RegisteredCou
             startActivity(Intent(this, SearchActivity::class.java))
         }
 
-        initCategoriesAdapter()
-        initCoursesAdapter()
-        initRegisteredCoursesAdapter()
+        try {
+            initCategoriesAdapter()
+            initCoursesAdapter()
+            initRegisteredCoursesAdapter()
+        }catch (e : Exception){
+            Log.e("Error",e.toString())
+        }
+
     }
 
     private fun initCategoriesAdapter() {
@@ -157,7 +164,7 @@ class MainActivity : AppCompatActivity() , CoursesAdapter.OnClick, RegisteredCou
 
     override fun onClickCategory(category: Category) {
         val i = Intent(applicationContext, SingleCategoryActivity::class.java)
-        i.putExtra(SingleCategoryActivity.CATEGORY_NAME, category.name)
+        i.putExtra(CATEGORY_NAME, category.name)
         startActivity(i)
     }
 }

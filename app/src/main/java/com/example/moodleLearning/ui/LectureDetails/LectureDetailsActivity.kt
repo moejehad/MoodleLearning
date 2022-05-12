@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.view.WindowManager
 import com.example.moodleLearning.R
 import com.example.moodleLearning.data.models.Assignment
@@ -107,6 +108,8 @@ class LectureDetailsActivity : AppCompatActivity() {
                         )
                     )
                     .addOnSuccessListener {
+                        etLectureAssignment.visibility = View.GONE
+                        btnSubmitAssignment.visibility = View.GONE
                         Helper.toast(this, "Assignment submitted successfully")
                     }
                     .addOnFailureListener {

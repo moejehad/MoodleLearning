@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.result.ActivityResultCallback
@@ -27,6 +28,7 @@ import com.example.moodleLearning.utils.Constant.LECTURE_TITLE
 import com.example.moodleLearning.utils.Constant.LECTURE_VIDEO
 import com.example.moodleLearning.utils.Constant.LECTURE_VIDEO_URL
 import com.example.moodleLearning.utils.Helper
+import com.example.moodleLearning.utils.Helper.Companion.openUrl
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
@@ -47,9 +49,8 @@ import kotlinx.android.synthetic.main.activity_edit_lecture.*
 import java.util.*
 
 
-class EditLectureActivity : AppCompatActivity() , LectureAssignmentAdapter.OnClick {
+class EditLectureActivity : AppCompatActivity() {
 
-    private val user = Firebase.auth.currentUser
     private val db = Firebase.firestore
     lateinit var storge: FirebaseStorage
 
@@ -97,7 +98,7 @@ class EditLectureActivity : AppCompatActivity() , LectureAssignmentAdapter.OnCli
         rvWatchers.adapter = adapter
         getWatchersIds()
 
-        AssignmentAdapter = LectureAssignmentAdapter(this,this)
+        AssignmentAdapter = LectureAssignmentAdapter(this)
         rvAssignments.adapter = adapter
         getAssignments()
 
@@ -114,7 +115,6 @@ class EditLectureActivity : AppCompatActivity() , LectureAssignmentAdapter.OnCli
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -145,7 +145,6 @@ class EditLectureActivity : AppCompatActivity() , LectureAssignmentAdapter.OnCli
                 finish()
             }
             .addOnFailureListener {
-                it.printStackTrace()
                 Helper.toast(applicationContext, "Failed to Updated lecture ${it.message}")
             }
     }
@@ -349,10 +348,6 @@ class EditLectureActivity : AppCompatActivity() , LectureAssignmentAdapter.OnCli
         simpleExoPlayerView.clearMediaItems()
 
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-    }
-
-    override fun onClick(item: Assignment) {
-
     }
 
 }

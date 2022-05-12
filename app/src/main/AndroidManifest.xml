@@ -27,9 +27,6 @@
             android:name=".ui.Teacher.EditLecture.EditLectureActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Teacher.AddLecture.EditLectureActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.LectureDetails.LectureDetailsActivity"
             android:exported="false" />
 

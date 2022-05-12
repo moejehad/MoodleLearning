@@ -63,4 +63,6 @@ object Constant {
     const val USER_ACTIVE_COURSES = "activeCourses"
     const val USER_FINISHED_COURSES = "finishedCourses"
 
+    const val CATEGORY_NAME = "categoryName"
+
 }

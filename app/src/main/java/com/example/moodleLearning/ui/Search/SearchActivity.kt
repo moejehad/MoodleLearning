@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.SearchView
 import com.example.moodleLearning.data.adapters.RegisteredCoursesAdapter
 import com.example.moodleLearning.databinding.ActivitySearchBinding
 import com.example.moodleLearning.data.models.Course
@@ -23,7 +24,7 @@ class SearchActivity : AppCompatActivity(), RegisteredCoursesAdapter.OnClick {
     private val user = Firebase.auth.currentUser
     private val db = Firebase.firestore
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var adapter : RegisteredCoursesAdapter
+    private lateinit var adapter: RegisteredCoursesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class SearchActivity : AppCompatActivity(), RegisteredCoursesAdapter.OnClick {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (s?.length!! > 3) {
+                if (s?.length!! > 1) {
                     db.collection(COURSES_COLLECTION)
                         .orderBy(COURSE_TITLE)
                         .whereGreaterThanOrEqualTo(COURSE_TITLE, binding.etSearch.text.toString())

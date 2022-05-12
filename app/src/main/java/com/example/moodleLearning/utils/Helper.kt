@@ -26,10 +26,6 @@ import java.text.SimpleDateFormat
 
 class Helper {
     companion object{
-        const val EMAIL = "ccmoodle2022@gmail.com"
-        const val PASSWORD = "**ccmoodle**"
-        const val YT_SUFFIX_1 = "https://youtube.com/watch?v="
-        const val YT_SUFFIX_2 = "https://youtu.be/"
 
         fun log(tag: Context, message: String) {
             Log.e(tag.javaClass.simpleName, message)
