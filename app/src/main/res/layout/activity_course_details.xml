@@ -212,9 +212,8 @@
                         android:id="@+id/tvInstructor"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/btn_bg"
                         android:padding="5dp"
-                        android:src="@drawable/ic_person" />
+                        android:src="@drawable/ic__user" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -226,8 +225,8 @@
                             android:id="@+id/tvInstructorName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/readex_regular"
+                            android:layout_marginBottom="2dp"
+                            android:fontFamily="@font/readex_bold"
                             android:text="Instructor Name"
                             android:textColor="@color/black"
                             android:textSize="14sp" />

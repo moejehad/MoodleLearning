@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,111 +7,131 @@
     android:background="@color/gray"
     tools:context=".ui.MainActivity">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="30dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="15dp"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/screenTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="5"
+                    android:fontFamily="@font/readex_bold"
+                    android:gravity="start"
+                    android:text="@string/Home"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/userProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic__user"/>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/screenTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/readex_bold"
-                android:gravity="start"
-                android:text="@string/Home"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                android:layout_weight="5"
-                android:layout_gravity="center_vertical"
-                android:textStyle="bold" />
-
-            <ImageButton
-                android:id="@+id/btnDashboard"
-                android:layout_width="0dp"
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:layout_gravity="end|bottom"
-                android:background="@drawable/btn_bg"
-                android:src="@drawable/ic_dashboard" />
-        </LinearLayout>
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/et_bg"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/gray"
+                android:fontFamily="@font/readex_regular"
+                android:gravity="center_vertical"
+                android:hint="@string/Search"
+                android:padding="10dp" />
 
-        <TextView
-            android:id="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/Search"
-            android:padding="10dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/readex_regular"
-            android:drawableEnd="@drawable/ic_search"
-            android:drawableTint="@color/gray"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/et_bg"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/category_item" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/category_item"
-            tools:itemCount="20"
-            android:layout_marginBottom="15dp"
-            android:orientation="horizontal"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/readex_bold"
+                    android:text="@string/recommended"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/course_item" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
                 android:layout_marginBottom="5dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/readex_bold"
-                android:text="@string/recommended"/>
+                android:text="@string/MyCourses"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-        </FrameLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCourses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/course_item"
-            tools:itemCount="10"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginBottom="5dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/readex_bold"
-            android:text="@string/MyCourses"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRegisteredCourses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            tools:listitem="@layout/registered_courses_item"
-            app:spanCount="2"
-            tools:itemCount="6"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRegisteredCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="6"
+                tools:listitem="@layout/registered_courses_item" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/blue"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_registere"
+        app:tint="@color/white"
+        app:borderWidth="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+</androidx.constraintlayout.widget.ConstraintLayout>

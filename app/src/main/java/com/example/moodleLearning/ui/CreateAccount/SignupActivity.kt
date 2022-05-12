@@ -1,5 +1,6 @@
 package com.example.moodleLearning.ui.CreateAccount
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -27,12 +28,17 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private var db = Firebase.firestore
     private var token = ""
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Create Account")
+        progressDialog.setCancelable(false)
 
         auth = Firebase.auth
         FirebaseMessaging.getInstance().token.addOnSuccessListener { token ->
@@ -72,11 +78,10 @@ class SignupActivity : AppCompatActivity() {
                 binding.etBio.text.isNotEmpty()&&
                 binding.etPassword.text.toString() == binding.etConfirmPassword.text.toString()
             ) {
+                progressDialog.show()
                 auth.createUserWithEmailAndPassword(binding.etEmail.text.toString(), binding.etPassword.text.toString())
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.e("login", "SignupUserWithEmail:success")
                             val user = auth.currentUser
                             saveUserDate(user!!,
                                 binding.etFirstName.text.toString(),
@@ -90,11 +95,11 @@ class SignupActivity : AppCompatActivity() {
                                 if (binding.rbUser.isChecked) STUDENT_ENUM else TEACHER_ENUM,
                                 token
                             )
+                            progressDialog.dismiss()
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.e("login", "createUserWithEmail:failure", task.exception)
                             toast(baseContext, "Authentication failed. ${task.exception?.message}")
                         }
+                        progressDialog.dismiss()
                     }
             } else {
                 toast(applicationContext, "Should Fill All Fields")

@@ -18,6 +18,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Moodle">
         <activity
+            android:name=".ui.Profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Teacher.EditLecture.EditLectureActivity"
             android:exported="false" />
         <activity

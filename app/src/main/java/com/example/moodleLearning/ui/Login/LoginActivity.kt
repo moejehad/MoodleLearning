@@ -1,5 +1,6 @@
 package com.example.moodleLearning.ui.Login
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,12 +19,17 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Login")
+        progressDialog.setCancelable(false)
 
         auth = Firebase.auth
     }
@@ -47,21 +53,20 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             if (binding.etEmail.text.isNotEmpty() && binding.etPassword.text.isNotEmpty()) {
+                progressDialog.show()
                 auth.signInWithEmailAndPassword(binding.etEmail.text.toString(), binding.etPassword.text.toString())
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.e("login", "LoginUserWithEmail:success")
                             val user = auth.currentUser
                             saveUserSession(applicationContext, user!!)
                             updateUserToken(applicationContext, user.uid)
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
+                            progressDialog.dismiss()
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.e("login", "LoginUserWithEmail:failure", task.exception)
                             Toast.makeText(baseContext, "Authentication failed. ${task.exception?.message}", Toast.LENGTH_LONG).show()
                         }
+                        progressDialog.dismiss()
                     }
             }
         }
