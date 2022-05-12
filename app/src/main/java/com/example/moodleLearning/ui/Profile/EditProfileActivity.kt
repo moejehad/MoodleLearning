@@ -1,11 +1,12 @@
 package com.example.moodleLearning.ui.Profile
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.moodleLearning.R
-import com.example.moodleLearning.data.models.User
+import com.example.moodleLearning.ui.MainActivity
 import com.example.moodleLearning.utils.Constant.SHARED_USER_ID
 import com.example.moodleLearning.utils.Constant.USERS_COLLECTION
 import com.example.moodleLearning.utils.Constant.USER_ADDRESS
@@ -60,17 +61,7 @@ class EditProfileActivity : AppCompatActivity() {
                 && userEmail.isNotEmpty() && userBio.isNotEmpty() && birthdayYear.isNotEmpty()
                 && userAddress.isNotEmpty() && userPhone.isNotEmpty()
             ) {
-                UpdateUser(
-                    userId,
-                    firstName,
-                    middleName,
-                    lastName,
-                    userEmail,
-                    userBio,
-                    birthdayYear,
-                    userAddress,
-                    userPhone
-                )
+                UpdateUser()
             } else {
                 Helper.toast(applicationContext, "Check Your Inputs Please")
             }
@@ -78,39 +69,28 @@ class EditProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun UpdateUser(
-        id: String,
-        firstName: String,
-        middleName: String,
-        lastName: String,
-        email: String,
-        bio: String,
-        birthdayYear: String,
-        address: String,
-        phone: String
-    ) {
-        var user = mapOf<String, String>(
-            "id" to id,
+    private fun UpdateUser() {
+        var user = mapOf<String, Any>(
             "firstName" to EditFirstName.text.toString(),
             "middleName" to EditMiddleName.text.toString(),
             "lastName" to EditLastName.text.toString(),
             "email" to EditEmail.text.toString(),
             "bio" to EditBio.text.toString(),
-            "birthdayYear" to EditBirthday.text.toString(),
+            "birthdayYear" to EditBirthday.text.toString().toInt(),
             "address" to EditAddress.text.toString(),
-            "phone" to EditPhone.text.toString()
+            "phone" to EditPhone.text.toString().toLong()
         )
         progressDialog.show()
 
         db.collection(USERS_COLLECTION)
-            .document(id)
+            .document(userId)
             .update(user)
             .addOnSuccessListener {
                 Helper.toast(applicationContext, "User Updated Successfully")
-                finish()
+                val i = Intent(this,MainActivity::class.java)
+                startActivity(i)
                 progressDialog.dismiss()
             }.addOnFailureListener {
-                it.printStackTrace()
                 Helper.toast(applicationContext, "Failed to Updated User ${it.message}")
                 progressDialog.dismiss()
             }
@@ -123,11 +103,11 @@ class EditProfileActivity : AppCompatActivity() {
         firstName = intent.getStringExtra(USER_FIRST_NAME)!!
         middleName = intent.getStringExtra(USER_MIDDLE_NAME)!!
         lastName = intent.getStringExtra(USER_FAMILY_NAME)!!
-        userEmail = intent.getStringExtra(USER_BIRTHDAY)!!
-        userBio = intent.getStringExtra(USER_ADDRESS)!!
-        birthdayYear = intent.getStringExtra(USER_PHONE)!!
-        userAddress = intent.getStringExtra(USER_EMAIL)!!
-        userPhone = intent.getStringExtra(USER_BIO)!!
+        userEmail = intent.getStringExtra(USER_EMAIL)!!
+        userBio = intent.getStringExtra(USER_BIO)!!
+        birthdayYear = intent.getStringExtra(USER_BIRTHDAY)!!
+        userAddress = intent.getStringExtra(USER_ADDRESS)!!
+        userPhone = intent.getStringExtra(USER_PHONE)!!
 
         EditFirstName.setText(firstName)
         EditMiddleName.setText(middleName)

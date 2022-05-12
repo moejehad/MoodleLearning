@@ -43,19 +43,4 @@ class User {
         this.email = email
     }
 
-
-    constructor(id: String, fName: String, middleName: String, lName: String,
-                email: String , birthdayYear: Int , address : String ,
-                phone : Long , bio: String) {
-        this.id = id
-        this.firstName = fName
-        this.middleName = middleName
-        this.lastName = lName
-        this.birthdayYear = birthdayYear
-        this.email = email
-        this.address = address
-        this.phone = phone
-        this.bio = bio
-    }
-
 }
