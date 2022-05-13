@@ -65,4 +65,6 @@ object Constant {
 
     const val CATEGORY_NAME = "categoryName"
 
+    const val MESSAGES_CHILD = "PublicChats"
+    const val CHAT_TITLE = "chatTitle"
 }

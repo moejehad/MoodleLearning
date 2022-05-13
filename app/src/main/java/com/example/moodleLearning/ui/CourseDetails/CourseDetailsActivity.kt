@@ -13,6 +13,7 @@ import com.example.moodleLearning.ui.Chat.PublicChatActivity
 import com.example.moodleLearning.ui.LectureDetails.LectureDetailsActivity
 import com.example.moodleLearning.ui.Teacher.AddLecture.AddLectureActivity
 import com.example.moodleLearning.ui.Teacher.EditLecture.EditLectureActivity
+import com.example.moodleLearning.utils.Constant.CHAT_TITLE
 import com.example.moodleLearning.utils.Constant.COURSES_COLLECTION
 import com.example.moodleLearning.utils.Constant.COURSE_ID
 import com.example.moodleLearning.utils.Constant.COURSE_REGISTERS_EMAILS
@@ -90,8 +91,8 @@ class CourseDetailsActivity : AppCompatActivity(), LecturesAdapter.OnClick {
 
         binding.tvPublicChat.setOnClickListener {
             val i = Intent(this, PublicChatActivity::class.java)
-            i.putExtra(PublicChatActivity.COURSE_ID,courseId)
-            i.putExtra(PublicChatActivity.CHAT_TITLE,courseName)
+            i.putExtra(COURSE_ID,courseId)
+            i.putExtra(CHAT_TITLE,courseName)
             startActivity(i)
         }
 

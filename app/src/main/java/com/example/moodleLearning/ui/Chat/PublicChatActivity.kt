@@ -1,7 +1,6 @@
 package com.example.moodleLearning.ui.Chat
 
-import android.content.Intent
-import android.net.Uri
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
-import com.bumptech.glide.Glide
 import com.example.moodleLearning.R
 import com.example.moodleLearning.databinding.ActivityPublicChatBinding
 import com.example.moodleLearning.data.models.Message
+import com.example.moodleLearning.utils.Constant.CHAT_TITLE
+import com.example.moodleLearning.utils.Constant.COURSE_ID
+import com.example.moodleLearning.utils.Constant.MESSAGES_CHILD
 import com.example.moodleLearning.utils.Helper
 import com.example.moodleLearning.utils.Helper.Companion.log
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -25,8 +26,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class PublicChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPublicChatBinding
@@ -50,11 +49,6 @@ class PublicChatActivity : AppCompatActivity() {
         var messengerTextView = itemView.findViewById<View>(R.id.messengerTextView) as TextView
     }
 
-    companion object {
-        const val MESSAGES_CHILD = "PublicChats"
-        const val COURSE_ID = "courseId"
-        const val CHAT_TITLE = "chatTitle"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
