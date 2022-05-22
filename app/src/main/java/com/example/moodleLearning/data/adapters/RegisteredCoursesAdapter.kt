@@ -8,17 +8,25 @@ import com.example.moodleLearning.databinding.RegisteredCoursesItemBinding
 import com.example.moodleLearning.data.models.Course
 import com.example.moodleLearning.utils.Helper
 
-class RegisteredCoursesAdapter(val context: Context, val click: OnClick) : RecyclerView.Adapter<RegisteredCoursesAdapter.ViewHolder>() {
+class RegisteredCoursesAdapter(val context: Context, val click: OnClick) :
+    RecyclerView.Adapter<RegisteredCoursesAdapter.ViewHolder>() {
     private var list = mutableListOf<Course>()
 
-    class ViewHolder(val binding: RegisteredCoursesItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: RegisteredCoursesItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount(): Int {
         return list.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(RegisteredCoursesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            RegisteredCoursesItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

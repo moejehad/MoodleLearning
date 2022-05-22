@@ -44,13 +44,6 @@ class Helper {
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
 
-        fun pickPdfFile(activity: Activity, requestCode: Int = 1){
-            val intentPDF = Intent(Intent.ACTION_GET_CONTENT)
-            intentPDF.type = "application/pdf"
-            intentPDF.type = "application/ppt"
-            intentPDF.addCategory(Intent.CATEGORY_OPENABLE)
-            activity.startActivityForResult(Intent.createChooser(intentPDF, "Select PDF OR PPT File"), requestCode)
-        }
 
         fun getCurrentUser(): FirebaseUser? {
             return Firebase.auth.currentUser

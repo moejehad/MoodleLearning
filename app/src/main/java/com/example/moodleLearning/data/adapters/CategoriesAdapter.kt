@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moodleLearning.databinding.CategoryItemBinding
 import com.example.moodleLearning.data.models.Category
 
-class CategoriesAdapter(val context: Context, val click: OnClick) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+class CategoriesAdapter(val context: Context, val click: OnClick) :
+    RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
     private var list = mutableListOf<Category>()
 
     class ViewHolder(val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -17,7 +18,13 @@ class CategoriesAdapter(val context: Context, val click: OnClick) : RecyclerView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            CategoryItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

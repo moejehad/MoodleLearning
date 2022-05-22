@@ -8,7 +8,8 @@ import com.example.moodleLearning.databinding.TeacherCourseItemBinding
 import com.example.moodleLearning.data.models.Course
 import com.example.moodleLearning.utils.Helper
 
-class TeacherCoursesAdapter(val context: Context, val click: OnClick) : RecyclerView.Adapter<TeacherCoursesAdapter.ViewHolder>() {
+class TeacherCoursesAdapter(val context: Context, val click: OnClick) :
+    RecyclerView.Adapter<TeacherCoursesAdapter.ViewHolder>() {
     private var list = mutableListOf<Course>()
 
     class ViewHolder(val binding: TeacherCourseItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -18,7 +19,13 @@ class TeacherCoursesAdapter(val context: Context, val click: OnClick) : Recycler
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(TeacherCourseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            TeacherCourseItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -11,7 +11,8 @@ import com.example.moodleLearning.data.models.Lecture
 import com.example.moodleLearning.utils.Helper
 import com.example.moodleLearning.utils.Helper.Companion.formatDate
 
-class LecturesAdapter(val context: Context, val click: OnClick, val isTeacher: Boolean) : RecyclerView.Adapter<LecturesAdapter.ViewHolder>() {
+class LecturesAdapter(val context: Context, val click: OnClick, val isTeacher: Boolean) :
+    RecyclerView.Adapter<LecturesAdapter.ViewHolder>() {
     private var list = mutableListOf<Lecture>()
 
     class ViewHolder(val binding: LectureItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -21,7 +22,13 @@ class LecturesAdapter(val context: Context, val click: OnClick, val isTeacher: B
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LectureItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            LectureItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

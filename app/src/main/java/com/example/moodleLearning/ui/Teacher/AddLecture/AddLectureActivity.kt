@@ -122,7 +122,7 @@ class AddLectureActivity : AppCompatActivity() {
     )
 
     private fun pickVideo() {
-        getVideo.launch("Video/*")
+        getVideo.launch("video/*")
     }
 
     private fun UploadVideo(uri: Uri?) {

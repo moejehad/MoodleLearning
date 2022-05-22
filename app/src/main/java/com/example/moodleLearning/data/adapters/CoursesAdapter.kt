@@ -8,7 +8,8 @@ import com.example.moodleLearning.databinding.CourseItemBinding
 import com.example.moodleLearning.data.models.Course
 import com.example.moodleLearning.utils.Helper.Companion.fillImage
 
-class CoursesAdapter(val context: Context, val click: OnClick) : RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
+class CoursesAdapter(val context: Context, val click: OnClick) :
+    RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
     private var list = mutableListOf<Course>()
 
     class ViewHolder(val binding: CourseItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -18,7 +19,13 @@ class CoursesAdapter(val context: Context, val click: OnClick) : RecyclerView.Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(CourseItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ViewHolder(
+            CourseItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
